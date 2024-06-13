@@ -10,12 +10,20 @@ module Restitution
         taille: 20
       },
       {
+        titre: 'Intitulé',
+        taille: 80
+      },
+      {
         titre: 'Réponse',
         taille: 45
       },
       {
         titre: 'Score',
         taille: 10
+      },
+      {
+        titre: 'Métacompétence',
+        taille: 20
       }
     ].freeze
 
@@ -43,16 +51,31 @@ module Restitution
       ligne = 1
       evenements = Evenement.where(session_id: @partie.session_id)
       evenements.reponses.order(position: :asc).each do |evenement|
-        sheet[ligne, 0] = evenement.donnees['question']
-        sheet[ligne, 1] = reponse_humanisee(evenement.donnees['reponse'])
-        sheet[ligne, 2] = evenement.donnees['score'] || SCORE_PAR_DEFAULT
+        sheet = remplie_la_ligne(sheet, ligne, evenement)
         ligne += 1
       end
       ligne
     end
 
+    def remplie_la_ligne(sheet, ligne, evenement)
+      sheet[ligne, 0] = evenement.donnees['question']
+      sheet[ligne, 1] = evenement.donnees['intitule']
+      sheet[ligne, 2] = reponse_humanisee(evenement.donnees['reponse'])
+      sheet[ligne, 3] = format_score(evenement)
+      sheet[ligne, 4] = evenement.donnees['metacompetence']
+
+      sheet
+    end
+
     def reponse_humanisee(reponse)
       reponse.underscore.humanize
+    end
+
+    def format_score(evenement)
+      score = evenement.donnees['score'] || SCORE_PAR_DEFAULT
+      score_max = evenement.donnees['score_max'] || SCORE_PAR_DEFAULT
+
+      "#{score}/#{score_max}"
     end
 
     def initialise_sheet(sheet)
