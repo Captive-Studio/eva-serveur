@@ -120,7 +120,7 @@
   .bouton-icone-plus {
     &::before {
       content: asset-data-url('plus.svg');
-      margin-right: 4px;
+      margin-right: 0.25rem;
     }
   }
   input[name="nom_responsable_suivi"] {

@@ -3,15 +3,18 @@
     "@storybook/addon-controls": "^7.6.11",
     "@storybook/server": "^7.6.11",
     "@storybook/server-webpack5": "^7.6.11",
-    "storybook": "^7.6.11",
-    "vscode-langservers-extracted": "^4.10.0",
     "eslint": "^8.8.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-promise": "^6.0.0",
+    "postcss-scss": "^4.0.9",
+    "storybook": "^7.6.11",
+    "stylelint": "^17.0.0",
+    "vscode-langservers-extracted": "^4.10.0"
   },
   "scripts": {
     "storybook": "storybook dev",
+    "stylelint": "stylelint 'app/assets/stylesheets/**/*.{scss,css}'",
     "nettoie-dsfr": "rm -rf public/pro/dsfr",
     "cree-dsfr-dossiers": "mkdir -p public/pro/dsfr/fonts && mkdir -p public/pro/dsfr/icons",
     "copie-dsfr-css": "cp node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/pro/dsfr/ && cp node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/pro/dsfr/",
