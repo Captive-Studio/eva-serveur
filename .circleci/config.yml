@@ -44,6 +44,14 @@ jobs:
             - vendor/bundle
 
       - run:
+          name: Install JS dependencies
+          command: npm ci --ignore-scripts
+
+      - run:
+          name: Stylelint
+          command: npm run stylelint
+
+      - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
